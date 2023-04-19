@@ -4,8 +4,8 @@
 $uamsecret = "testing123";
 $userpassword=1;
 $host = "localhost";
-$user = "amber";
-$passward = "sheep890924";
+$user = "radius";
+$passward = "radpass";
 $database = "radius";
 $db = mysqli_connect("$host", "$user","$passward", "$database");
 if (mysqli_connect_errno())
