@@ -12,7 +12,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
 
     $sql = "insert into radusergroup (username,groupname) values ('$myusername','user')";
 
-    $limit1 = "insert into radcheck (username, attribute, op, value) values ('$myusername', 'Max-Hourly-Traffic', ':=', '5000000')";
+    $limit1 = "insert into radcheck (username, attribute, op, value) values ('$myusername', 'Max-Data', ':=', '5000000')";
 
     $limit2 = "insert into radcheck (username, attribute, op, value) values ('$myusername', 'Acct-Interim-Interval', ':=', '60')";
 
@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $dummy = mysqli_query($db, $limit3);
 
     echo "Register success";
-    header("location: admin.php");
+    header("location: real_admin.php");
 }
 ?>
 
