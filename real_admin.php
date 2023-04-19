@@ -50,7 +50,9 @@ print " users.<br/><br />";
 	<table border=1>
 		<td>Username</td>
 		<td>Flow Limit</td>
+		<td>Current Data Usage</td>
 		<td>Daily Session Limit</td>
+		<td>Current Session Time</td>
 		<td>Modify</td>
 <!-- show user list -->
 <?php
@@ -76,13 +78,26 @@ for($count=0; $count<$number_of_users; $count++)
 		{
 			$daily_limit = $row['value'];
 		}
+
+		// Set current session t
 		$usage_sql = "SELECT SUM(AcctSessionTime) FROM radacct WHERE UserName='$tmp_user_name'";
-		$user_result = mysqli_query($db, $sql);
+		$user_result = mysqli_query($db, $usage_sql);
+		$usage_row = mysqli_fetch_array($user_result);
+		$hourly_usage = $usage_row[0];
+
+		// Set current data usage
+		$usage_sql = "SELECT SUM(acctinputoctets+acctoutputoctets) FROM radacct WHERE UserName='$tmp_user_name'";
+        $user_result = mysqli_query($db, $usage_sql);
+        $usage_row = mysqli_fetch_array($user_result);
+        $data_usage = $usage_row[0];
+		
 	}
 	print "<tr>";
 	print "<td>" . $tmp_user_name . "</td>";
 	print "<td>" . $hourly_limit . "</td>";
+	print "<td>" . $data_usage . "</td>";
 	print "<td>" . $daily_limit . "</td>";
+	print "<td>" . $hourly_usage . "</td>";
 	print "<td><input type='button' onclick='jump_to_user(\"$tmp_user_name\");' name='$tmp_user_name' value='Edit'></td>";
 }
 print "<tr>";
