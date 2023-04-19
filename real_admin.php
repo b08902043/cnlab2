@@ -49,7 +49,7 @@ print " users.<br/><br />";
 <div>
 	<table border=1>
 		<td>Username</td>
-		<td>Hourly Flow Limit</td>
+		<td>Flow Limit</td>
 		<td>Daily Session Limit</td>
 		<td>Modify</td>
 <!-- show user list -->
@@ -63,10 +63,12 @@ for($count=0; $count<$number_of_users; $count++)
 	// initialization
 	$hourly_limit = "-1";
 	$daily_limit = "-1";
+	$data_usage = "-1";
+	$hourly_usage = "-1";
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		
-		if($row['attribute'] == "Max-Hourly-Traffic")
+		if($row['attribute'] == "Max-Data")
 		{
 			$hourly_limit = $row['value'];
 		}
@@ -74,6 +76,8 @@ for($count=0; $count<$number_of_users; $count++)
 		{
 			$daily_limit = $row['value'];
 		}
+		$usage_sql = "SELECT SUM(AcctSessionTime) FROM radacct WHERE UserName='$tmp_user_name'";
+		$user_result = mysqli_query($db, $sql);
 	}
 	print "<tr>";
 	print "<td>" . $tmp_user_name . "</td>";
