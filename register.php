@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $dummy = mysqli_query($db, $limit3);
 
     echo "Register success";
-    header("location: login.php");
+    header("location: admin.php");
 }
 ?>
 
