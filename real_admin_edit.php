@@ -6,7 +6,7 @@ session_start();
 $username = $_GET['username'];
 
 // get those parameters from database using $username
-$sql1 = "SELECT * FROM radcheck WHERE username='$username' and attribute='Max-Hourly-Traffic'";
+$sql1 = "SELECT * FROM radcheck WHERE username='$username' and attribute='Max-Data'";
 $sql2 = "SELECT * FROM radcheck WHERE username='$username' and attribute='Max-Daily-Session'";
 
 $result1 = mysqli_query($db, $sql1);
@@ -31,7 +31,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 		$MHFLimit = mysqli_real_escape_string($db, $_POST['MHF']);
 		$MDSLimit = mysqli_real_escape_string($db, $_POST['MDS']);
 	
-		$sql1 = "UPDATE radius.radcheck SET value='$MHFLimit' WHERE radcheck.username='$username' and attribute='Max-Hourly-Traffic'";
+		$sql1 = "UPDATE radius.radcheck SET value='$MHFLimit' WHERE radcheck.username='$username' and attribute='Max-Data'";
 		$sql2 = "UPDATE radius.radcheck SET value='$MDSLimit' WHERE radcheck.username='$username' and attribute='Max-Daily-Session'";
 
 		$dummy = mysqli_query($db, $sql1);
@@ -50,7 +50,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 <h1>You're Now Editting User <?php print "$username" ?></h1>
 	<div>
 		<FORM action="" method="POST">
-		<label>Max Hourly Flow</label>
+		<label>Max Flow</label>
 		<input type="text" name="MHF" value="<?php print $currentMHF ?>" />
 		<br><br>
 		<label>Max Daily Session</label>
