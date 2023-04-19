@@ -25,7 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST")
     $dummy = mysqli_query($db, $limit3);
 
     echo "Register success";
-    // header("location: hotspotlogin.php?res=notyet");
+    header("location: login.php");
 }
 ?>
 
